@@ -13,7 +13,7 @@ group by album_id;
 select m.name from musician m
 join albummusician a on m.id = a.musician_id
 join album a2 on a.album_id = a2.id 
-where a2.year_of_publication < 2020; 
+where a2.year_of_publication != 2020;
 
 select c.name from collection c 
 join collectiontrack c2 on c.id = c2.collection_id 
