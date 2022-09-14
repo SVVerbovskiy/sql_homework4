@@ -1,19 +1,21 @@
-select count(musician_id) from genremusician
-group by genre_id;
+select name_genre, count(musician_id) from music_genre mg 
+join genremusician g on mg.id = g.genre_id 
+group by name_genre ;
 
 select count(t."name") from track t
 join album a on t.album_id = a.id 
 where a.year_of_publication >=2019 and a.year_of_publication <= 2020;
 
+select a.name, avg(duration) from album a
+join track t on a.id = t.album_id 
+group by a.name;
 
-
-select avg(duration) from track
-group by album_id;
-
-select m.name from musician m
-join albummusician a on m.id = a.musician_id
-join album a2 on a.album_id = a2.id 
-where a2.year_of_publication != 2020;
+select distinct name from musician m
+where name not in (
+	select distinct m2.name from musician m2
+	join albummusician a on m2.id = a.musician_id
+	join album al on a.album_id = al.id
+	where year_of_publication = 2020);
 
 select c.name from collection c 
 join collectiontrack c2 on c.id = c2.collection_id 
@@ -57,6 +59,7 @@ where t.album_id in (
     )
 )
 order by a.name;
+
 
 
 
